@@ -1,12 +1,13 @@
 package collection.students;
 
-import collection.myArrayList.MyArrayList;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Student {
 
     private String nameOfStudent;
 
-    private MyArrayList<Book> books = new MyArrayList<>();
+    private ArrayList<Book> books = new ArrayList<>();
 
 
     public Student(String nameOfStudent) {
@@ -21,26 +22,16 @@ public class Student {
         this.nameOfStudent = nameOfStudent;
     }
 
-}
+    public void addBook(Book book) {
+        books.add(book);
+    }
 
+    public List<Book> getBooks() {
+        return new ArrayList<>(books);
+    }
 
-
-
-
-
-
-
-
-
-class StudentTest {
-    public static void main(String[] args) {
-        Student st1 = new Student("Alice Vandom");
-        Student st2 = new Student("David Stivenson");
-        Student st3 = new Student("Anne Scott");
-        Student st4 = new Student("Emily Green");
-        Student st5 = new Student("Rose Darcy");
-
-
-
+    @Override
+    public String toString() {
+        return "Student: " + nameOfStudent + "\nBooks: " + books;
     }
 }

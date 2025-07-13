@@ -1,7 +1,8 @@
 package collection.myArrayList;
 
+import java.util.Collection;
 
-public interface MyInterface<T> {
+public interface MyList<T> {
 
     public abstract void add(T inputValue);
 
@@ -9,5 +10,6 @@ public interface MyInterface<T> {
 
     public abstract T get(int index);
 
-    public abstract void addAll();
+    public abstract void addAll(Collection<? extends T> collection);
+    
 }
