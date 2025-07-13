@@ -1,6 +1,10 @@
 package collection.myArrayList;
 
-public class MyArrayList<T> implements MyInterface<T> {
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.stream.Stream;
+
+public class MyArrayList<T> implements MyList<T> {
     
     private T[] values;
 
@@ -13,16 +17,18 @@ public class MyArrayList<T> implements MyInterface<T> {
         currentSize = 0;
     }
 
+    //Получение текущего размера
     public int getCurrentSize() {
         return currentSize;
     }
 
+    //Добавление элемента в конец
     @Override
     public void add(T inputValue) {
         if (currentSize >= values.length * 0.8) {
             expand();
         }
-        for (int i=0; i < values.length; i++) {
+        for (int i = 0; i < values.length; i++) {
             if(values[i] == null) {
                 values[i] = inputValue;
                 currentSize++;
@@ -31,6 +37,7 @@ public class MyArrayList<T> implements MyInterface<T> {
         }
     }
 
+    //Удаление элемента по значению
     @Override
     public void remove(T inputValue) {
         int elementIndexExist = -1;
@@ -39,7 +46,7 @@ public class MyArrayList<T> implements MyInterface<T> {
                 elementIndexExist = i;
                 break;
             } else {
-                System.out.println("Input value does not exist!");
+                System.out.println("Input value doesn't exist!");
             }
         }
         T[] newValues = (T[]) new Object[currentSize - 1];
@@ -53,6 +60,7 @@ public class MyArrayList<T> implements MyInterface<T> {
         currentSize--;
     }
 
+    //Расширение вместимости
     private void expand() {
         int newCapacity = values.length + values.length / 5;
         T[] newValues = (T[]) new Object[newCapacity];
@@ -62,6 +70,7 @@ public class MyArrayList<T> implements MyInterface<T> {
         values = newValues;
     }
 
+    //Получение элемента по индексу
     @Override
     public T get(int index) {
         int valuesCapacity = values.length;
@@ -71,10 +80,18 @@ public class MyArrayList<T> implements MyInterface<T> {
         return null;
     }
 
+    //Добавление всех элементов коллекции
     @Override
-    public void addAll() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'addAll'");
+    public void addAll(Collection<? extends T> collection) {
+        if(collection == null) {
+            throw new NullPointerException("Complete the collection!");
+        }
+        for (T el : collection) {
+            add(el);
+        }  
     }
 
+    public Stream<T> stream() {
+        return Arrays.stream(values, 0, currentSize);
+    }
 }

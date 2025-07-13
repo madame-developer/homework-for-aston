@@ -1,6 +1,6 @@
 package collection.students;
 
-import java.util.Date;
+import java.util.Objects;
 
 public class Book {
 
@@ -8,10 +8,10 @@ public class Book {
     
     private int numberOfPages;
 
-    private Date yearOfRelease;
+    private int yearOfRelease;
 
 
-    public Book(String name, int numberOfPages, Date yearOfRelease) {
+    public Book(String name, int numberOfPages, int yearOfRelease) {
         this.name = name;
         this.numberOfPages = numberOfPages;
         this.yearOfRelease = yearOfRelease;
@@ -25,7 +25,7 @@ public class Book {
         this.name = name;
     }
 
-    public int numberOfPages() {
+    public int getNumberOfPages() {
         return numberOfPages;
     }
 
@@ -33,15 +33,13 @@ public class Book {
         this.numberOfPages = numberOfPages;
     }
 
-    public Date yearOfRelease() {
+    public int getYearOfRelease() {
         return yearOfRelease;
     }
 
-    public void setYearOfRelease(Date yearOfRelease) {
+    public void setYearOfRelease(int yearOfRelease) {
         this.yearOfRelease = yearOfRelease;
     }
-
-
 
     @Override
     public boolean equals(Object obj) {
@@ -54,12 +52,17 @@ public class Book {
         if (obj instanceof Book) {
             Book book = (Book) obj;
 
-            if (this.getName().equals(book.getName())) {
+            if (yearOfRelease == book.yearOfRelease && numberOfPages == book.numberOfPages && Objects.equals(name, book.name)) {
                 return true;
             } else {
                 return false;
             }
         }
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return name + ": " + numberOfPages + ", " + yearOfRelease;
     }
 }
